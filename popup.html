@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outlook Thread Defuser</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Thread Defuser</h1>
+      <span id="stateBadge" class="badge">確認中</span>
+    </header>
+
+    <p class="description">長大なOutlookスレッドの古い本文と返信履歴をDOMから退避します。</p>
+
+    <section class="controls">
+      <label class="toggle-row">
+        <span>拡張機能を有効化</span>
+        <input id="enabled" type="checkbox">
+      </label>
+      <label class="toggle-row">
+        <span>自動で軽量化</span>
+        <input id="autoDefuse" type="checkbox">
+      </label>
+      <label class="toggle-row">
+        <span>返信履歴を切り離す</span>
+        <input id="trimQuotes" type="checkbox">
+      </label>
+      <label class="toggle-row">
+        <span>処理結果を通知</span>
+        <input id="showToast" type="checkbox">
+      </label>
+
+      <label class="field-row">
+        <span>残す本文数</span>
+        <input id="keepMessages" type="number" min="1" max="8" step="1">
+      </label>
+
+      <label class="field-row">
+        <span>新しいメールの位置</span>
+        <select id="newestPosition">
+          <option value="auto">自動（閲覧位置優先）</option>
+          <option value="top">上</option>
+          <option value="bottom">下</option>
+        </select>
+      </label>
+
+      <label class="field-row">
+        <span>引用を切る文字数</span>
+        <input id="quoteCharThreshold" type="number" min="1000" max="100000" step="1000">
+      </label>
+
+      <label class="field-row">
+        <span>軽量化開始ノード数</span>
+        <input id="threadNodeThreshold" type="number" min="500" max="30000" step="500">
+      </label>
+    </section>
+
+    <section class="actions">
+      <button id="runButton" class="primary" type="button">今すぐ軽量化</button>
+      <button id="restoreButton" type="button">すべて復元</button>
+    </section>
+
+    <section class="status" aria-live="polite">
+      <div><span>検出本文</span><strong id="bodyCount">-</strong></div>
+      <div><span>退避中</span><strong id="parkedCount">-</strong></div>
+      <div><span>削減ノード</span><strong id="removedCount">-</strong></div>
+      <div><span>ページ全体</span><strong id="pageNodes">-</strong></div>
+    </section>
+
+    <p id="message" class="message"></p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
