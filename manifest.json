@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Outlook Thread Defuser",
+  "version": "0.1.1",
+  "description": "Outlook on the web の長大スレッドから古い本文・引用履歴を退避し、フリーズを軽減します。",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://outlook.office.com/*",
+    "https://outlook.office365.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.cloud.microsoft/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*",
+        "https://outlook.live.com/*",
+        "https://outlook.cloud.microsoft/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Outlook Thread Defuser",
+    "default_popup": "popup.html"
+  }
+}
